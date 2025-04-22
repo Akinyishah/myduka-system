@@ -87,6 +87,28 @@ products=fetch_data('products')
 #print("fetching prods using method2:\n",products)
 
 
+#METHOD 3-INSERT DATA INTO MULTIPLE TABLES WITH VARYING NUMBER OF COLUMNS
+#INSERT UNTO <TABLE_NAME>(COLUMNS)VALUES{};
+def insert_data(table,columns,values):
+   cur.execute(f"insert into {table}({columns})values{values}")
+   conn.commit()
+
+table='products'
+columns='name,buying_price,selling_price,stock_quantity'
+values=('Microwave',8999,9999,8)
+insert_data(table,columns,values)
+products=fetch_data('products')
+print(products)
+
+
+
+
+
+
+
+
+
+
 
 
 
