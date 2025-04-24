@@ -14,7 +14,7 @@ using python. Flask is often classified as a micro-framework,because it does not
     this is a pre-written code that helps solves specific problems or adds certain features 
     #concept of building a house:-
     OPTION1-this is the library
-    -identigy land,identify requirements,design the house,go the hardware, 
+    -identify land,identify requirements,design the house,go the hardware, 
     Library is a like a store that has hammer,nails,wood,ironsheet
     with library the programmer is in control of usage.
 
@@ -32,15 +32,21 @@ using python. Flask is often classified as a micro-framework,because it does not
 
 
 #ROUTING- Mechanism used to map URLs to view functions -system for resource navigation.
-#what is a route
+-connect function to a URL-
+#what is a route- Aroute is a  path in the URL 
+
 Definition-part of the URL that determines what functions to
             execute when a specific URL is accessed or visited 
 
-www.myduka.com-this is the URL
-www.myduka/products.com-this is now a route where resources being provided here are only about products            
+www.myduka.com/co.ke -this is the URL
+www.myduka/products.com-this is now a route where resources being provided here are only about products 
+techcamp.co.ke- this is a URL
+techcamp.co.ke/about us- this is a rule- this is a path           
 
 #HOW DO WE IMPLEMENT ROUTING IN FLASK?
-@app.route()- this is a decorator :function that allows you to modify the behaviour of other functions
+@app.route()- this is a decorator:function that allows you to modify the behaviour of other functions 
+has a prefix which is '@'
+
 BELOW ARE EXAMPLES 
 
 @app.route('/products)
@@ -56,4 +62,41 @@ def login():
 #enabling the framework to route incoming HTTP requests to the appropriate handler functions.
 
 #PARARAMETERS THAT CAN BE PASSED IN A ROUTE FUNCTION-decorator
-1.Rule- e.g /, /products,/sales,/users- This defines the path a user accesses the browser(index.html is / only at the begining)
+1.Rule- specific path yopu want to access  e.g /, /products,/sales,/users- This defines the path a user accesses
+ the browser(index.html is / only at the begining)
+
+ -We have been returning strings step forward 
+ return a simple HTML page (homepage)
+ SERVE HTML PAGES FOLLOW THE BELOW RULES:
+                  MY DUKA PROJECT structured
+myduka                  
+    -main.py
+    -database.py
+ create a folder that holds all the HTML stuff 
+    1.templates(all html files will be inside here() e.g 
+    index.html.
+    sales.html.
+    products.html )   
+    2.static-(Files that do not change much)
+    -all static files which are the 
+    styling e.g myduka.css.style.css,home.css
+    images
+    java script files
+    favicons-small logos that appear at the top there.
+    fonts, PDF files
+#
+
+#RENDERING- Process of serving HTML with Flask
+Goal is to display HTML page file using flask
+
+#IMPLEMENTATION-
+we render HTML pages using functions provided by flask
+its called render_template()-this function:
+1.has to be imported from flask in order to be used next to import from flask put a comma then render_template
+2.it takes some parameters - full name of my HTML page
+e.g render_template('index.html')
+
+TASK.
+Create 2 files products.html and sales.html 
+render them using flask render_template
+

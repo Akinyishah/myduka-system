@@ -1,22 +1,19 @@
 #this is where the APPLICATION IS app=Flask(__name__) MUST BE THERE 
 #Import flask to use it.
-from flask import Flask
 
-#instantiate your application:-initializion of flask
-#flask instance
+from flask import Flask, render_template
 
+#instantiate your application:-initializion of flask.
 app=Flask(__name__)
 
+#this is a route part of a URL that determines what functions to execute.route connects functions to the URL 
+#mapping url to a function
+#Decorator-function that wraps another function to modify its behaviour
+#Functions MUST HAVE unique NAME
 
-
-#(__name__)--#the name is now a special inbuilt variable  which 
-# It represents the name of the current file where the application is built e.g mine is main.py
-#tells Flask where my project/application starts 
-
-@app.route('/products')
-def home(): #def home is dependent on the app,route function
-    return "My home Page" 
-
+@app.route('/')          #func 1
+def home():              #func 2   
+    return render_template("index.html")
 
 #running an application one has to tell FLASK 
-app.run()
+app.run(debug=True)
