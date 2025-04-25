@@ -69,11 +69,11 @@ def login():
  return a simple HTML page (homepage)
  SERVE HTML PAGES FOLLOW THE BELOW RULES:
                   MY DUKA PROJECT structured
-myduka                  
+myduka-folder containing the entire project                
     -main.py
     -database.py
  create a folder that holds all the HTML stuff 
-    1.templates(all html files will be inside here() e.g 
+    1.templates(all html files will be inside here() e.g  -follows casing & syntax
     index.html.
     sales.html.
     products.html )   
@@ -81,6 +81,7 @@ myduka
     -all static files which are the 
     styling e.g myduka.css.style.css,home.css
     images
+    videos
     java script files
     favicons-small logos that appear at the top there.
     fonts, PDF files
@@ -93,8 +94,55 @@ Goal is to display HTML page file using flask
 we render HTML pages using functions provided by flask
 its called render_template()-this function:
 1.has to be imported from flask in order to be used next to import from flask put a comma then render_template
-2.it takes some parameters - full name of my HTML page
+2.it takes some parameters - 
+
+            1.HTMLPAGES- (full name of my HTML page)
 e.g render_template('index.html')
+            2.VARIABLE HOLDING data
+
+ #IMPLEMENTING PASSING DATA FROM FLASK TO HTML
+    - To implement the above we have to use tools provided by flask        
+    #tool is called jinja pass data inform of variables from flask to HTML 
+     
+    #WHAT IS JINJA?-Its a templating engine intergrated with FLASK to render(return) dynamic HTML pages-
+    #{dynamic means it can take some data and the data changes depending on user input}
+    TEMPLATING ENGINE-Tool in web development used to generate dynamic HTML
+
+    JINJA IS JUST A SYNTAX {{}} - written in form of 2 curly brackets to its NOT IMPORTED 
+    *to pass a variable using jinja write the correct variable name inside the 2 curly brackets e.g
+    name="Akinyi Shah"
+
+    return render_template("index.html",name=name)
+
+    #inside my HTML templates pass the jinja syntax
+    <p> Hello, {{name}} </p>
+
+    #WHAT CAN JINJA DO- IT helps/perform python logic inside HTML templates
+
+    #HOW DOES JINJA WORK- 1.alreday have predefined templates
+                           2.passing jinja sysntax  {{}} inside the templates
+                           3.your flask application provided data to be passed inside jinja
+                           4. data is rendered   
+
+    #WHAT CAN WE PASS INSIDE JINJA
+        1.SIMPLE VARIABLES-once you've passed this variable as parameter inside render_template-
+        pass the variable inside jinja 
+        syntax{{variable}} pass the same name of the variable e.g data is placed on the Index.html 
+
+        2.CONTROL STRUCTURES-
+        a. Sequence- this means my program is being exceuted sequentially from top to bottom,
+        b. Selection- this are the conditional statements- IF/ELIF/ELSE,SWITCH/BREAK
+        c. Iteration-looping-executing instructions/code until a specified condition is met e.g for loops, while,do-while
+
+    # IMEPLEMENTING CONTROL STRUCTURES WITH JINJA 
+    JINJA syntax when implementing control structures:
+        {% if  %}
+        N/B- You have to end the program 
+        you have to define a starting point and an ending point check index.html
+
+    # STRONG FOCUS ON IF STATEMENTS AND LOOPS
+        # CONDITIONAL STATEMENTS- IF                      
+
 
 TASK.
 Create 2 files products.html and sales.html 
