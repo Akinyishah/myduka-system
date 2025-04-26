@@ -23,12 +23,18 @@ def home():               #func 2
 
 @app.route('/products')
 def products():
-    return render_template("products.html")
+    fruits=["apple","oranges","tangerines","cauliflower","grapes"]
+    return render_template("products.html",fruits=fruits)
 
 
 @app.route('/sales')
 def sales():
     return render_template("sales.html")
+
+@app.route('/tables')
+def tables():
+    return render_template("tables.html")
+
 
 #running an application one has to tell FLASK 
 app.run(debug=True)

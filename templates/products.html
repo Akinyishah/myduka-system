@@ -15,6 +15,7 @@
             <a class="nav-link active" aria-current="page" href="/">Home</a>
             <a class="nav-link" href="/products">products</a>
             <a class="nav-link" href="/sales">sales</a>
+            <a class="nav-link" href="/tables">tables</a>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
@@ -26,20 +27,25 @@
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi eius cupiditate reiciendis ducimus totam, velit
             provident atque quaerat iure asperiores, laborum fugiat dicta voluptatibus ratione quod? Adipisci
             repudiandae ratione recusandae.</p>
-
-
+    </div>
+    <div class="container">
+        {% for fruits in fruits%}
+        <ul>
+            <li>{{fruits}}</li>
+        </ul>
+        {% endfor %}
     </div>
 
 
 
+  
 
 
-
-
-
-
-
-
+    <!-- <div class="container">
+        {% for num in num%}
+        <li>{{num}}</li>
+        {% endfor %}
+    </div> -->
 
 
 
