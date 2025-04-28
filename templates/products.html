@@ -35,17 +35,37 @@
         </ul>
         {% endfor %}
     </div>
+    <div class="container">
+        <table class="table table-striped-columns table table-hover table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Product ID</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Buying Price</th>
+                    <th scope="col">Selling price</th>
+                    <th scope="col">Stock Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for product in products%}
+                <tr>
+                    <td>{{product[0]}}</td>
+                    <td>{{product[1]}}</td>
+                    <td>{{product[2]}}</td>
+                    <td>{{product[3]}}</td>
+                    <td>{{product[4]}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+    </div>
+   
 
 
 
   
 
 
-    <!-- <div class="container">
-        {% for num in num%}
-        <li>{{num}}</li>
-        {% endfor %}
-    </div> -->
+
 
 
 

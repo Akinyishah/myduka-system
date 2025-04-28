@@ -17,17 +17,15 @@ time=datetime.now() # creating time as at now
 #for product in products: #On loop you must always print the iteration e.g (i or product)
 #for sale in sales: #for loop if you want your data to look presentable and readable.
 
-def fetching_products():
+def fetch_products():
   cur.execute('select * from products;')
   products=cur.fetchall()
   return products
-#   print(product)
 
 def fetch_sales():
  cur.execute('select * from sales;')
  sales=cur.fetchall()
- return products
-# print(sale)
+ return sales
 
 # fetch_sales() 
 # fetching_products()  
@@ -45,7 +43,7 @@ def fetch_data(table):
 products=fetch_data('products')
 sales=fetch_data('sales')
 #print("products from fetch data func:\n", products)
-#print("sales from fetch data func:\n", sales)
+# print("sales from fetch data func:\n", sales)
 
 # INSERTING PRODUCTS 
 def insert_products():
@@ -84,7 +82,7 @@ def insert_products_method_2(values):
 product1=("laptop",24500,32600,70) #should be outside the def function.After conn.commit remove indentation
 insert_products_method_2(product1)
 products=fetch_data('products')
-print("fetching prods using method2:\n",products)
+# print("fetching prods using method2:\n",products)
 
 
 #METHOD 3-INSERT DATA INTO MULTIPLE TABLES WITH VARYING NUMBER OF COLUMNS

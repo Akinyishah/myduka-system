@@ -31,65 +31,26 @@
         <table class="table table-striped-columns table table-hover table table-bordered">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Date of Sale</th>
-                    <th scope="col">Customer Name</th>
-                    <th scope="col">Fruit Name</th>
-                    <th scope="col">Quantity Sold/kg</th>
-                    <th scope="col">Unit price/kg</th>
-                    <th scope="col">Payment Mode</th>
+                    <th scope="col">Sales ID</th>
+                    <th scope="col">PID</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Created at</th>
                 </tr>
             </thead>
             <tbody>
+                {%for sale in sales%}
                 <tr>
-                    <th scope="row">1</th>
-                    <td><input type="date" name="sale-date-001"></td>
-                    <td>Akinyi</td>
-                    <td>Grapes</td>
-                    <td>100</td>
-                    <td>399</td>
-                    <td>Mpesa</td>
+                     <td>{{sale[0]}}</td>
+                    <td>{{sale[1]}}</td>
+                    <td>{{sale[2]}}</td>
+                    <td>{{sale[3]}}</td>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td><input type="date" name="sale-date-001"></td>
-                    <td>Philip</td>
-                    <td>Oranges</td>
-                    <td>50</td>
-                    <td>699</td>
-                    <td>Apple Pay</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td><input type="date" name="sale-date-001"></td>
-                    <td>Sharon</td>
-                    <td>Apples</td>
-                    <td>30</td>
-                    <td>199</td>
-                    <td>Mpesa</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td><input type="date" name="sale-date-001"></td>
-                    <td>Maxwell</td>
-                    <td>Cauliflower</td>
-                    <td>10</td>
-                    <td>799</td>
-                    <td>cash</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td><input type="date" name="sale-date-001"></td>
-                    <td>Felgona</td>
-                    <td>Tangerines</td>
-                    <td>80</td>
-                    <td>1099</td>
-                    <td>Mpesa</td>
-                </tr>
-
+                {% endfor %}
             </tbody>
         </table>
     </div>
+               
+   
 
 
 

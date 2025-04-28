@@ -2,6 +2,7 @@
 #Import flask to use it.
 
 from flask import Flask, render_template
+from database import fetch_products,fetch_sales
 
 #instantiate your application:-initializion of flask.
 app=Flask(__name__)
@@ -13,7 +14,7 @@ app=Flask(__name__)
 
 @app.route('/')          #func 1
 def home():               #func 2  
-    user={"name":"Akinyi","location":"Nairobi"}    
+    user={"name":"Akinyi","location":"Nairobi","area":"Luanda"}    
     num=[1,2,3,4,5]   
     return render_template("index.html",data=user,num=num)#declaring variable for variable e.g data=name
 
@@ -24,12 +25,14 @@ def home():               #func 2
 @app.route('/products')
 def products():
     fruits=["apple","oranges","tangerines","cauliflower","grapes"]
-    return render_template("products.html",fruits=fruits)
+    products=fetch_products() # calling the function so that it can store the function from the database.
+    return render_template("products.html",fruits=fruits,products=products) #products=products-declare a nother variable to hold the 1st variable
 
 
 @app.route('/sales')
 def sales():
-    return render_template("sales.html")
+  sales=fetch_sales()
+  return render_template("sales.html",sales=sales)
 
 @app.route('/tables')
 def tables():

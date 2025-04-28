@@ -148,3 +148,10 @@ TASK.
 Create 2 files products.html and sales.html 
 render them using flask render_template
 
+DISPLAY MY DATABASE ON THE browser
+1.display the raw data from our data base in our browser.
+2.once we can do that- the next step will be display data in a much more organized manner(use of tables)
+
+-Import the function that fetches data you want to view 
+-declare variable inside a route to call that function.
+-declare a second variable 
