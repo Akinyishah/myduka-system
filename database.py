@@ -80,8 +80,8 @@ def insert_products_method_2(values):
   conn.commit()
 
 product1=("laptop",24500,32600,70) #should be outside the def function.After conn.commit remove indentation
-insert_products_method_2(product1)
-products=fetch_data('products')
+# insert_products_method_2(product1)
+# products=fetch_data('products')
 # print("fetching prods using method2:\n",products)
 
 
@@ -93,8 +93,8 @@ def insert_data(table,columns,values):
 
 table='products'
 columns='name,buying_price,selling_price,stock_quantity'
-values=('Microwave',8999,9999,8)
-insert_data(table,columns,values)
+# values=('Microwave',8999,9999,8)
+# insert_data(table,columns,values)
 products=fetch_data('products')
 # print(products)
 

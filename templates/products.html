@@ -15,13 +15,34 @@
             <a class="nav-link active" aria-current="page" href="/">Home</a>
             <a class="nav-link" href="/products">products</a>
             <a class="nav-link" href="/sales">sales</a>
-            <a class="nav-link" href="/tables">tables</a>
+            <a class="nav-link" href="/Dashboard">Dashboard</a>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>
     </nav>
+    <div class="container">
+        <form action="/add_products" method="post">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Product Name</label>
+                <input type="text" class="form-control" name="p-name" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Buying Price</label>
+                <input type="number" class="form-control" name="b-price"id="exampleInputPassword1">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Selling Price</label>
+                <input type="number" class="form-control" name="s-price"id="exampleInputPassword1">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Stock Quantity</label>
+                <input type="number" class="form-control" name="stock" id="exampleInputPassword1">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
     <div class="container">
         <h2> These are my Products </h2>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi eius cupiditate reiciendis ducimus totam, velit
@@ -58,11 +79,11 @@
                 {% endfor %}
             </tbody>
     </div>
-   
 
 
 
-  
+
+
 
 
 

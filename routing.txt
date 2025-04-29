@@ -155,3 +155,32 @@ DISPLAY MY DATABASE ON THE browser
 -Import the function that fetches data you want to view 
 -declare variable inside a route to call that function.
 -declare a second variable 
+
+#POSTING DATA-
+    -.Sending data from a client(web browser,mobile app) to a server
+#DATA FLOW    
+    -A user visits a route and are provided with a form to pass some data
+    -user fills out the forms and submits it 
+        -from form provided to user specify :
+                -action-specifies the route to map to a function-what function to execute '/products'
+                -Method-http method tells FLASK what do with data
+                    1.GET- get or fetch data
+                    2.POST- post or send data to a server
+                    3.PUT- this updates data
+                    4.DELETE-deletes or gets rid of data
+                -name attribute-this is a key that allows request object to access form data 
+                -input type(MAKE SURE YOU DEFINE CORRECT DATA TYPES)
+    -Dpending on a route that was specified FLASK will decide which function to call
+    -This form data will be taken to FLASK 
+    -FLASK extracts data from the form using a request object
+        -the Request object will allow me to access form data from the client
+        -The request object is imported from FLASK.
+        -ONCE PRODUCT IS INSERTED 
+            -Redirect a user to a different route 
+
+            FROM FLASK WE USE REDIRECT(),url_for -they are from flask redirect(url_for('products'))
+
+       EXAMPLE - "p-name":"eggs" -p-name is key which flask will use the key to extract data
+       ENSURE TO IMPORT REQUEST
+
+
