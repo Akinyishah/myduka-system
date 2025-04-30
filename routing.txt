@@ -178,9 +178,24 @@ DISPLAY MY DATABASE ON THE browser
         -ONCE PRODUCT IS INSERTED 
             -Redirect a user to a different route 
 
-            FROM FLASK WE USE REDIRECT(),url_for -they are from flask redirect(url_for('products'))
+            FROM FLASK WE USE REDIRECT(),url_for -they are from flask redirect(url_for('products'))-name of the view function
 
        EXAMPLE - "p-name":"eggs" -p-name is key which flask will use the key to extract data
        ENSURE TO IMPORT REQUEST
 
+#POSTING SALES
+FORM-
+    -Action-pass the route to define what function processes the data
+    -Method-telling server what to do with data,GET,POST,PUT DELETE-
+            -data from form comes in key value pairs
+    -Name-key used to access data that a user inputs 
+    take NOTE OF INPUT TYPE
+In our sales FORM:  
+PID-foreign key
+    -display actual product names for the user
+    -pass products data in sales route 
+    -loop through products and display them in a drop-down
+    -pick the PID key from select tag
+Quantity   
+    -have the normal input for quantity of type number
 

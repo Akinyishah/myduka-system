@@ -87,19 +87,29 @@ product1=("laptop",24500,32600,70) #should be outside the def function.After con
 
 #METHOD 3-INSERT DATA INTO MULTIPLE TABLES WITH VARYING NUMBER OF COLUMNS
 #INSERT UNTO <TABLE_NAME>(COLUMNS)VALUES{};
-def insert_data(table,columns,values):
-   cur.execute(f"insert into {table}({columns})values{values}")
-   conn.commit()
+# def insert_data(table,columns,values):
+#    cur.execute(f"insert into {table}({columns})values{values}")
+#    conn.commit()
 
-table='products'
-columns='name,buying_price,selling_price,stock_quantity'
-# values=('Microwave',8999,9999,8)
-# insert_data(table,columns,values)
-products=fetch_data('products')
-# print(products)
+# table='products'
+# columns='name,buying_price,selling_price,stock_quantity'
+# # values=('Microwave',8999,9999,8)
+# # insert_data(table,columns,values)
+# products=fetch_data('products')
+# # print(products)
 
 
+#INSERT SALES METHOD 2
+def insert_sales_method_2(values):
+  insert ="insert into sales(pid,quantity,created_at)values(%s,%s,'now()')"
+  cur.execute(insert,values)
+  conn.commit()
 
+#INSERT PRODUCTS METHOD 2
+def insert_products_method_2(values):
+  insert = f"insert into products(name,buying_price,selling_price,stock_quantity)values{values}"
+  cur.execute(insert)
+  conn.commit()
 
 
 

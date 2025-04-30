@@ -23,6 +23,25 @@
         </div>
     </nav>
     <div class="container">
+        <form action="/make_sale" method="post">
+            <div>
+                <select name="pid">
+                    <option value="">Select product</option>
+                    {% for product in products %}
+                    <option value={{product[0]}}>{{product[1]}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label for="">Quantity</label> <br>
+                <input type="number" name="quantity">
+            </div>
+            <div>
+                <button type="submit">Make sale</button>
+            </div>
+        </form>
+    </div>
+    <div class="container">
         <h1>WELCOME TO MY SALES</h1>
         <P>This are our latest sales based on the month of November which we held and <br>
             that every Friday was a black Friday that had discounts on all products.</P>
@@ -40,7 +59,7 @@
             <tbody>
                 {%for sale in sales%}
                 <tr>
-                     <td>{{sale[0]}}</td>
+                    <td>{{sale[0]}}</td>
                     <td>{{sale[1]}}</td>
                     <td>{{sale[2]}}</td>
                     <td>{{sale[3]}}</td>
@@ -49,8 +68,8 @@
             </tbody>
         </table>
     </div>
-               
-   
+
+
 
 
 

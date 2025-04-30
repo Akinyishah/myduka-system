@@ -2,7 +2,7 @@
 #Import flask to use it.
 
 from flask import Flask, render_template,request,redirect,url_for
-from database import fetch_products,fetch_sales,insert_products_method_2
+from database import fetch_products,fetch_sales,insert_products_method_2,insert_sales_method_2
 
 #instantiate your application:-initializion of flask.
 app=Flask(__name__)
@@ -37,7 +37,27 @@ def add_products():
 @app.route('/sales')
 def sales():
   sales=fetch_sales()
-  return render_template("sales.html",sales=sales)
+  products=fetch_products()
+  return render_template("sales.html",sales=sales,products=products)                    #products=products-declare a nother variable to hold the 1st variable
+
+
+@app.route('/make_sale',methods=['POST'])
+def make_sale():
+    product_id=request.form['pid']
+    quantity=request.form['quantity']
+    new_sale=[product_id,quantity]
+    insert_sales_method_2(new_sale)
+    return redirect(url_for('sales'))
+
+
+   
+
+
+
+
+
+
+
 
 @app.route('/Dashboard')
 def Dashboard():
