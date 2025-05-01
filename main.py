@@ -2,7 +2,7 @@
 #Import flask to use it.
 
 from flask import Flask, render_template,request,redirect,url_for
-from database import fetch_products,fetch_sales,insert_products_method_2,insert_sales_method_2
+from database import fetch_products,fetch_sales,insert_products_method_2,insert_sales_method_2,profit_per_product,profit_per_day,sales_per_product,sales_per_day
 
 #instantiate your application:-initializion of flask.
 app=Flask(__name__)
@@ -48,20 +48,11 @@ def make_sale():
     new_sale=[product_id,quantity]
     insert_sales_method_2(new_sale)
     return redirect(url_for('sales'))
-
-
-   
-
-
-
-
-
-
-
+ 
 
 @app.route('/Dashboard')
 def Dashboard():
-    return render_template("dashboard.html")
+    return render_template("dashboard.html",profit_per_product,profit_per_day,sales_per_product,sales_per_day)
 
 #running an application one has to tell FLASK 
 app.run(debug=True)
