@@ -111,10 +111,33 @@ def insert_products_method_2(values):
   cur.execute(insert)
   conn.commit()
 
+#PROFIT PER PRODUCT:
+def profit_per_product():
+   cur.execute("""SELECT Products.name,SUM((products.selling_price-products.buying_price)*sales.quantity) AS Totalprofit FROM 
+               products INNER JOIN sales ON products.id=sales.pid GROUP BY (products.name);""" )
+   profit_per_product=cur.fetchall()
+   return profit_per_product
 
+#PROFIT PER DAY:
+def profit_per_day():
+   cur.execute("""SELECT sales.created_at,SUM((products.selling_price-products.buying_price)*sales.quantity) AS Totalprofit FROM 
+               products INNER JOIN sales ON products.id=sales.pid GROUP BY  sales.created_at) ORDER BY (sales.created_at);""") 
+   profit_per_day=cur.fetchall()
+   return profit_per_day
 
+#SALES PER PRODUCT:
+def sales_per_product():
+   cur.execute("""SELECT products.name,SUM(products.selling_price*sales.quantity) AS Total_Sales FROM 
+               products INNER JOIN sales ON products.id = sales.pid GROUP BY (products.name);""")
+   sales_per_product=cur.fetchall()
+   return sales_per_product
 
-
+#SALES PER DAY:
+def sales_per_day():
+   cur.execute("""SELECT sales.created_at, SUM(products.selling_price*sales.quantity)AS revenue FROM 
+               sales INNER JOIN products ON products.id = sales.pid GROUP BY sales.created_at ORDER BY  (sales.created_at);""")
+   sales_per_day=cur.fetchall()
+   return sales_per_day
 
 
 
