@@ -113,15 +113,15 @@ def insert_products_method_2(values):
 
 #PROFIT PER PRODUCT:
 def profit_per_product():
-   cur.execute("""SELECT Products.name,SUM((products.selling_price-products.buying_price)*sales.quantity) AS Totalprofit FROM 
-               products INNER JOIN sales ON products.id=sales.pid GROUP BY (products.name);""" )
+   cur.execute("""SELECT products.name,SUM((products.selling_price-products.buying_price)*sales.quantity) AS Totalprofit FROM products inner join sales
+               ON products.id=sales.pid group by products.name;""")
    profit_per_product=cur.fetchall()
    return profit_per_product
 
 #PROFIT PER DAY:
 def profit_per_day():
-   cur.execute("""SELECT sales.created_at,SUM((products.selling_price-products.buying_price)*sales.quantity) AS Totalprofit FROM 
-               products INNER JOIN sales ON products.id=sales.pid GROUP BY  sales.created_at) ORDER BY (sales.created_at);""") 
+   cur.execute("""SELECT date(sales.created_at) AS date ,SUM((products.selling_price-products.buying_price)*sales.quantity) AS Totalprofit FROM 
+               products INNER JOIN sales ON products.id=sales.pid GROUP BY  date ORDER BY date ASC ;""") 
    profit_per_day=cur.fetchall()
    return profit_per_day
 
@@ -134,8 +134,8 @@ def sales_per_product():
 
 #SALES PER DAY:
 def sales_per_day():
-   cur.execute("""SELECT sales.created_at, SUM(products.selling_price*sales.quantity)AS revenue FROM 
-               sales INNER JOIN products ON products.id = sales.pid GROUP BY sales.created_at ORDER BY  (sales.created_at);""")
+   cur.execute("""SELECT date(sales.created_at, AS date SUM(products.selling_price*sales.quantity)AS revenue FROM 
+               sales INNER JOIN products ON products.id = sales.pid GROUP BY date  ORDER BY date ASC;""")
    sales_per_day=cur.fetchall()
    return sales_per_day
 

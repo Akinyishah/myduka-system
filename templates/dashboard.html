@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <nav class="navbar bg-body-tertiary">
+    <nav class="navbar bg-primary">
         <div class="container-fluid">
             <a class="nav-link active" aria-current="page" href="/">Home</a>
             <a class="nav-link" href="/products">products</a>
@@ -23,67 +23,17 @@
         </div>
     </nav>
     <div class="container">
-        <table class="table table-striped-columns table table-hover table table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Date of Sale</th>
-                    <th scope="col">Customer Name</th>
-                    <th scope="col">Fruit Name</th>
-                    <th scope="col">Quantity Sold/kg</th>
-                    <th scope="col">Unit price/kg</th>
-                    <th scope="col">Payment Mode</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td><input type="date" name="sale-date-001"></td>
-                    <td>Akinyi</td>
-                    <td>Grapes</td>
-                    <td>100</td>
-                    <td>399</td>
-                    <td>Mpesa</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td><input type="date" name="sale-date-001"></td>
-                    <td>Philip</td>
-                    <td>Oranges</td>
-                    <td>50</td>
-                    <td>699</td>
-                    <td>Apple Pay</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td><input type="date" name="sale-date-001"></td>
-                    <td>Sharon</td>
-                    <td>Apples</td>
-                    <td>30</td>
-                    <td>199</td>
-                    <td>Mpesa</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td><input type="date" name="sale-date-001"></td>
-                    <td>Maxwell</td>
-                    <td>Cauliflower</td>
-                    <td>10</td>
-                    <td>799</td>
-                    <td>cash</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td><input type="date" name="sale-date-001"></td>
-                    <td>Felgona</td>
-                    <td>Tangerines</td>
-                    <td>80</td>
-                    <td>1099</td>
-                    <td>Mpesa</td>
-                </tr>
 
-            </tbody>
-        </table>
+        <p>{{product_name}}</p>
+        <p>{{p_product}}</p>
+        <p>{{s_product}}</p>
+
+    </div>
+    <div class="container">
+        <canvas id="bar-chart" width="800" height="450"></canvas>
+    </div>
+    <div class="container">
+        <canvas id="line-chart" width="800" height="450"></canvas>
     </div>
 
 
@@ -124,6 +74,81 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script>
+        new Chart(document.getElementById("bar-chart"), {
+            type: 'bar',
+            data: {
+                labels: {{ product_name | safe }},
+            datasets: [
+            {
+                label: "sales per product (KSH)",
+                backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                data: {{s_product | safe}},
+                    },
+                    {
+                label: "Profit per product (KSH)",
+                backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                data: {{p_product | safe}},
+                    },
+        ]
+            },
+            options: {
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'Sales and Profit per product'
+            }
+        }
+        });
+
+
+
+        new Chart(document.getElementById("line-chart"), {
+  type: 'line',
+  data: {
+    labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+    datasets: [{ 
+        data: [86,114,106,106,107,111,133,221,783,2478],
+        label: "Africa",
+        borderColor: "#3e95cd",
+        fill: false
+      }, { 
+        data: [282,350,411,502,635,809,947,1402,3700,5267],
+        label: "Asia",
+        borderColor: "#8e5ea2",
+        fill: false
+      }, { 
+        data: [168,170,178,190,203,276,408,547,675,734],
+        label: "Europe",
+        borderColor: "#3cba9f",
+        fill: false
+      }, { 
+        data: [40,20,10,16,24,38,74,167,508,784],
+        label: "Latin America",
+        borderColor: "#e8c3b9",
+        fill: false
+      }, { 
+        data: [6,3,2,2,7,26,82,172,312,433],
+        label: "North America",
+        borderColor: "#c45850",
+        fill: false
+      }
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'Sale and product per Day'
+    }
+  }
+});
+
+    </script>
+
 </body>
 
 </html>
