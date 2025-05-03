@@ -27,8 +27,15 @@ def fetch_sales():
  sales=cur.fetchall()
  return sales
 
+def fetch_users():
+   cur.execute('select * from users;')
+   users=cur.fetchall()
+   return users
+
+
 # fetch_sales() 
-# fetching_products()  
+# fetch_products()  
+# fetct_users()
 
 #TASK REVIEW- USED FOR ANY TABLE OF MY CHOICE 
 # Modify your select and insert functions to be able 
@@ -42,8 +49,10 @@ def fetch_data(table):
 
 products=fetch_data('products')
 sales=fetch_data('sales')
+users=fetch_data('users')
 #print("products from fetch data func:\n", products)
 # print("sales from fetch data func:\n", sales)
+# print("users from fetch data func:\n", users)
 
 # INSERTING PRODUCTS 
 def insert_products():
@@ -110,6 +119,10 @@ def insert_products_method_2(values):
   insert = f"insert into products(name,buying_price,selling_price,stock_quantity)values{values}"
   cur.execute(insert)
   conn.commit()
+#product1=("laptop",24500,32600,70) #should be outside the def function.After conn.commit remove indentation
+# insert_products_method_2(product1)
+# products=fetch_data('products')
+# print("fetching prods using method2:\n",products)
 
 #PROFIT PER PRODUCT:
 def profit_per_product():
@@ -117,13 +130,6 @@ def profit_per_product():
                ON products.id=sales.pid group by products.name;""")
    profit_per_product=cur.fetchall()
    return profit_per_product
-
-#PROFIT PER DAY:
-def profit_per_day():
-   cur.execute("""SELECT date(sales.created_at) AS date ,SUM((products.selling_price-products.buying_price)*sales.quantity) AS Totalprofit FROM 
-               products INNER JOIN sales ON products.id=sales.pid GROUP BY  date ORDER BY date ASC ;""") 
-   profit_per_day=cur.fetchall()
-   return profit_per_day
 
 #SALES PER PRODUCT:
 def sales_per_product():
@@ -134,10 +140,28 @@ def sales_per_product():
 
 #SALES PER DAY:
 def sales_per_day():
-   cur.execute("""SELECT date(sales.created_at, AS date SUM(products.selling_price*sales.quantity)AS revenue FROM 
+   cur.execute("""SELECT date(sales.created_at) AS date, SUM(products.selling_price*sales.quantity)AS revenue FROM 
                sales INNER JOIN products ON products.id = sales.pid GROUP BY date  ORDER BY date ASC;""")
    sales_per_day=cur.fetchall()
    return sales_per_day
+
+#PROFIT PER DAY:
+def profit_per_day():
+   cur.execute("""SELECT date(sales.created_at) AS date, SUM((products.selling_price-products.buying_price)*sales.quantity) AS Totalprofit FROM 
+               products INNER JOIN sales ON products.id=sales.pid GROUP BY  date ORDER BY date ASC ;""") 
+   profit_per_day=cur.fetchall()
+   return profit_per_day
+
+#INSERT USERS USING METHOD 2
+def insert_users_method_2(values):
+  insert = f"insert into users(name,Email,phone_number)values{values}"
+  cur.execute(insert)
+  conn.commit()
+user1=("Akello Veronica","vakello98@gmail.com","+254708794582") #should be outside the def function.After conn.commit remove indentation
+insert_users_method_2(user1)
+users=fetch_data('users')
+print("fetching users using method2:\n",users)
+
 
 
 

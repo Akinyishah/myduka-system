@@ -27,6 +27,8 @@
         <p>{{product_name}}</p>
         <p>{{p_product}}</p>
         <p>{{s_product}}</p>
+        <p>{{p_day}}</p>
+        <p>{{s_day}}</p>
 
     </div>
     <div class="container">
@@ -110,15 +112,15 @@
         new Chart(document.getElementById("line-chart"), {
   type: 'line',
   data: {
-    labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+    labels: {{p_day | safe}},
     datasets: [{ 
-        data: [86,114,106,106,107,111,133,221,783,2478],
-        label: "Africa",
+        data: {{p_day | safe}},
+        label: "profit per day",
         borderColor: "#3e95cd",
         fill: false
       }, { 
-        data: [282,350,411,502,635,809,947,1402,3700,5267],
-        label: "Asia",
+        data: {{s_day | safe}},
+        label: "Sale per day",
         borderColor: "#8e5ea2",
         fill: false
       }, { 
