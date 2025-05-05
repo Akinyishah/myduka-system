@@ -2,7 +2,7 @@
 #Import flask to use it.
 
 from flask import Flask, render_template,request,redirect,url_for
-from database import fetch_products,fetch_sales,insert_products_method_2,insert_sales_method_2,profit_per_product,sales_per_product,sales_per_day,profit_per_day
+from database import fetch_products,fetch_sales,insert_products_method_2,insert_sales_method_2,profit_per_product,sales_per_product,sales_per_day,profit_per_day,insert_users_method_2
 
 #instantiate your application:-initializion of flask.
 app=Flask(__name__)
@@ -74,7 +74,7 @@ def Dashboard():
 
 @app.route('/Register')
 def register():
-    render_template('Register.html')
+     return render_template('register.html')
 
 #running an application one has to tell FLASK 
 app.run(debug=True)
