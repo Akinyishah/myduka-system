@@ -152,15 +152,18 @@ def profit_per_day():
    profit_per_day=cur.fetchall()
    return profit_per_day
 
+
+
+
 #INSERT USERS USING METHOD 2
 def insert_users_method_2(values):
   insert = f"insert into users(name,Email,phone_number)values{values}"
   cur.execute(insert)
   conn.commit()
-user1=("Akello Veronica","vakello98@gmail.com","+254708794582") #should be outside the def function.After conn.commit remove indentation
-insert_users_method_2(user1)
-users=fetch_data('users')
-print("fetching users using method2:\n",users)
+# user1=("Akello Veronica","vakello98@gmail.com","+254708794582") #should be outside the def function.After conn.commit remove indentation
+# insert_users_method_2(user1)
+# users=fetch_data('users')
+# print("fetching users using method2:\n",users)
 
 
 

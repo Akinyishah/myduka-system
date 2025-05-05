@@ -199,3 +199,20 @@ PID-foreign key
 Quantity   
     -have the normal input for quantity of type number
 
+
+
+    PROFIT AND SALES PER DAY
+     DATE IS THE COMMON METRIC PASSED ON X-AXIS 
+     Y- AXIS WE WILL PASS PROFITS AND SALES 
+         - See how profit compares to sales in relation to dates    
+
+        -YOU CAN FETCH DATE FROM EITHER PROFIT PER DAY OR SALES PER DAY -THIS IS BECAUSE
+     BOTH ARE A LIST OF TUPLES,AND EACH OF THE TUPLES HAS A DATE METRIC AS THE FIRST INDEX AND DATE METRIC 
+     IS THE SAME FOR BOTH SALES AND PROFIT    
+        - GET THE DATE FROM SALES PER DAY USING LIST COMPREHENSION AND GET 
+    THE DATE METRIC USING INDEX-WHICH IS [0] 
+
+
+TEMPLATE INHERITANCE
+-functionality that allows me to create a base template which contains common web page elements like the navbar
+footers,headers,    

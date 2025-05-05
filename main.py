@@ -54,15 +54,26 @@ def make_sale():
 def Dashboard():
     profit_product=profit_per_product()
     sale_product=sales_per_product()
+    sale_day=sales_per_day()
+    profit_day=profit_per_day()
+
+#LIST COMPREHENSION TO GET INDIVIDUAL DATA POINTS
     product_name=[i [0] for i in profit_product]
     p_product=[float(i[1])for i in profit_product]
     s_product=[float(i[1]) for i in sale_product]
-    profit_day=profit_per_day()
-    sale_day=sales_per_day()
-    p_day=[float(i[1]) for i in profit_day]
-    s_day=[float(i [1]) for i in sale_day]
 
-    return render_template("dashboard.html",product_name=product_name,p_product=p_product,s_product=s_product,p_day=p_day,s_day=s_day)
+
+    date=[str(i [0]) for i in sale_day]
+    p_day=[float(i [1])for i in profit_day]
+    s_day=[float(i [1])for i in sale_day]
+
+
+
+
+
+    return render_template("dashboard.html",
+                           product_name=product_name,p_product=p_product,s_product=s_product,
+                           date=date,s_day=s_day,p_day=p_day)
 
 #running an application one has to tell FLASK 
 app.run(debug=True)
