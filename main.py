@@ -68,12 +68,13 @@ def Dashboard():
     s_day=[float(i [1])for i in sale_day]
 
 
-
-
-
     return render_template("dashboard.html",
                            product_name=product_name,p_product=p_product,s_product=s_product,
                            date=date,s_day=s_day,p_day=p_day)
+
+@app.route('/Register')
+def register():
+    render_template('Register.html')
 
 #running an application one has to tell FLASK 
 app.run(debug=True)

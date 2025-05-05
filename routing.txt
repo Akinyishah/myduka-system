@@ -216,3 +216,6 @@ Quantity
 TEMPLATE INHERITANCE
 -functionality that allows me to create a base template which contains common web page elements like the navbar
 footers,headers,    
+-create a base.html page inside templates folder 
+-have common elements and features inside the base.html which are : footers,navigation and headers,title
+-have the other templates inherit from the base,html

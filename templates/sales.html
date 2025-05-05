@@ -1,73 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% block title %} sales {% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
-
-<body>
-    <nav class="navbar bg-primary">
-        <div class="container-fluid">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
-            <a class="nav-link" href="/products">Products</a>
-            <a class="nav-link" href="/sales">Sales</a>
-            <a class="nav-link" href="/Dashboard">Dashboard</a>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-        </div>
-    </nav>
-    <div class="container">
-        <form action="/make_sale" method="post">
-            <div>
-                <select name="pid">
-                    <option value="">Select product</option>
-                    {% for product in products %}
-                    <option value={{product[0]}}>{{product[1]}}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div>
-                <label for="">Quantity</label> <br>
-                <input type="number" name="quantity">
-            </div>
-            <div>
-                <button type="submit">Make sale</button>
-            </div>
-        </form>
-    </div>
-    <div class="container">
-        <h1>WELCOME TO MY SALES</h1>
-        <P>This are our latest sales based on the month of November which we held and <br>
-            that every Friday was a black Friday that had discounts on all products.</P>
-    </div>
-    <div class="container">
-        <table class="table table-striped-columns table table-hover table table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">Sales ID</th>
-                    <th scope="col">PID</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Created at</th>
-                </tr>
-            </thead>
-            <tbody>
-                {%for sale in sales%}
-                <tr>
-                    <td>{{sale[0]}}</td>
-                    <td>{{sale[1]}}</td>
-                    <td>{{sale[2]}}</td>
-                    <td>{{sale[3]}}</td>
-                </tr>
+{% block content %}
+<div class="container">
+    <form action="/make_sale" method="post">
+        <div>
+            <select name="pid">
+                <option value="">Select product</option>
+                {% for product in products %}
+                <option value={{product[0]}}>{{product[1]}}</option>
                 {% endfor %}
-            </tbody>
-        </table>
-    </div>
+            </select>
+        </div>
+        <div>
+            <label for="">Quantity</label> <br>
+            <input type="number" name="quantity">
+        </div>
+        <div>
+            <button type="submit">Make sale</button>
+        </div>
+    </form>
+</div>
+<div class="container">
+    <h1>WELCOME TO MY SALES</h1>
+    <P>This are our latest sales based on the month of November which we held and <br>
+        that every Friday was a black Friday that had discounts on all products.</P>
+</div>
+<div class="container">
+    <table class="table table-striped-columns table table-hover table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Sales ID</th>
+                <th scope="col">PID</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Created at</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for sale in sales%}
+            <tr>
+                <td>{{sale[0]}}</td>
+                <td>{{sale[1]}}</td>
+                <td>{{sale[2]}}</td>
+                <td>{{sale[3]}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
 
 
 
@@ -113,12 +94,6 @@
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-        crossorigin="anonymous"></script>
 
 </body>
 
