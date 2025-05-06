@@ -169,7 +169,7 @@ def profit_per_day():
 
 def check_user(email):
    query="select * from users WHERE email =%s"
-   cur.execute(query,(email,) )
+   cur.execute(query,(email,) ) #the comma is after email so as it can be regognized as tuple
    user=cur.fetchall()
    return user
 
