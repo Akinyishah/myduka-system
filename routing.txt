@@ -219,3 +219,27 @@ footers,headers,
 -create a base.html page inside templates folder 
 -have common elements and features inside the base.html which are : footers,navigation and headers,title
 -have the other templates inherit from the base,html
+
+
+USER REGISTRATION
+    - Need a users table.
+REGISTER ROUTE on main.py
+
+
+1.taking user input from a register form.
+2.check that all inputs are filled correctly.
+3.User posts the information
+    -method-POST  defined both in form and ROUTE
+    -Getting form data using request.form
+    -request object-request.Method tells server what to do with the data
+                    -request.form gets user input posted from a form 
+                    - PASSWORD HASHING- converts plain text password into a form that cant be easily understood-this is encoding for security purpose
+                        cryptic form - for security reasons.
+                        use bcrypt
+4.Check 
+    if user exists:-select a user using email 
+     - let the user know they've alreday registered and tell them to log instead.[use flash messaging]
+
+  ELSE 
+    -add user  insert user and 
+    -redirect to login.  

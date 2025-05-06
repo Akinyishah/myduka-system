@@ -155,15 +155,33 @@ def profit_per_day():
 
 
 
-#INSERT USERS USING METHOD 2
-def insert_users_method_2(values):
-  insert = f"insert into users(name,Email,phone_number)values{values}"
-  cur.execute(insert)
-  conn.commit()
+# #INSERT USERS USING METHOD 2
+# def insert_users_method_2(values):
+#   insert = f"insert into users(name,Email,phone_number)values{values}"
+#   cur.execute(insert)
+#   conn.commit()
 # user1=("Akello Veronica","vakello98@gmail.com","+254708794582") #should be outside the def function.After conn.commit remove indentation
 # insert_users_method_2(user1)
 # users=fetch_data('users')
 # print("fetching users using method2:\n",users)
+
+#POINT OF THIS IS TO RETURN 1 USER IF RETURNS INFOR IT MEANS USER ALREDAY EXISTS SO LOG IN
+
+def check_user(email):
+   query="select * from users WHERE email =%s"
+   cur.execute(query,(email,) )
+   user=cur.fetchall()
+   return user
+
+
+def add_users (user_details):
+   query="insert into users(name,email,phone_number,password)values(%s,%s,%s,%s)"
+   cur.execute(query,user_details)
+   conn.commit()
+   cur.close()
+
+
+   
 
 
 
