@@ -5,21 +5,26 @@
 
 <div class="container">
     {% if data %}
-    <h1>SHALYNE'S STORE.</h1>
+    <h1>SANDE'S STORE.</h1>
     {% else %}
     <p>data not provided</p>
     {% endif %}
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad accusamus eligendi temporibus repellendus
-        perferendis adipisci numquam quia unde ipsum, eos nisi dolorum, non animi hic quibusdam, doloremque
-        veniam
-        optio
-        impedit.</p>
-</div>
-<div class="container">
-    {% for num in num%}
-    <li>{{num}}</li>
-    {% endfor %}
-</div>
+    <div class="hero">
+        <h3>Welcome to Your POS Dashboard</h3>
+        <p>
+            Welcome to your Point of Sale (POS) dashboard — your centralized platform for managing day-to-day business
+            operations. This powerful system is tailored to simplify your workflow by allowing you to process sales
+            quickly, track inventory accurately, and monitor customer behavior efficiently. With real-time analytics and
+            organized reporting tools, you can make informed decisions that help grow your business. Whether you're
+            running a retail store, a cafe, or a small kiosk, our POS solution empowers you to work smarter and serve
+            customers better.
+        </p>
+    </div>
+    <div class="container">
+        {% for num in num%}
+        <li>{{num}}</li>
+        {% endfor %}
+    </div>
 </div>
 
 {% endblock %}

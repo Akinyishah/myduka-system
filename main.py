@@ -26,8 +26,8 @@ def home():               #func 2
 @app.route('/products')
 def products():
     fruits=["apple","oranges","tangerines","cauliflower","grapes"]
-    products=fetch_products()                                                                # calling the function so that it can store the function from the database.
-    return render_template("products.html",fruits=fruits,products=products)                    #products=products-declare a nother variable to hold the 1st variable
+    products=fetch_products()                                            # calling the function so that it can store the function from the database.
+    return render_template("products.html",fruits=fruits,products=products)#products=products-declare a nother variable to hold the 1st variable
 
 @app.route('/add_products',methods=["GET","POST"])
 def add_products():
@@ -93,7 +93,7 @@ def register():
      else:
          pass
 
-     return render_template('register.html')
+     return render_template('Register.html')
 
 
 @app.route('/login')
