@@ -105,13 +105,10 @@ def login():
         if not user:
             return redirect(url_for('register'))
         else:
-            if bcrypt.check_password_hash(password,):
-
-
-
-
-
-
+            if bcrypt.check_password_hash(user[-1],password):
+                return redirect(url_for('Dashboard'))
+            else:
+                print("incorrect password")
     return render_template('login.html')
 
 
