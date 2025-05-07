@@ -238,8 +238,16 @@ REGISTER ROUTE on main.py
                         use bcrypt
 4.Check 
     if user exists:-select a user using email 
+        -if they dont exist -redirect to register
+    if they exist
+        -check their password
+        -    
      - let the user know they've alreday registered and tell them to log instead.[use flash messaging]
 
   ELSE 
     -add user  insert user and 
     -redirect to login.  
+
+WHEN A USER IS POSTED 
+getting user infor from a form after posting to FLASK attempting a log in Flask will extract data using request object
+If user Exists will check their password stored verses password being inputted if they match redirect user to dashboard

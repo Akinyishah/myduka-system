@@ -77,30 +77,44 @@ def Dashboard():
                            product_name=product_name,p_product=p_product,s_product=s_product,
                            date=date,s_day=s_day,p_day=p_day)
 
-@app.route('/Register',methods=['POST'])
+@app.route('/Register',methods=['GET','POST'])
 def register():
-     name=request.form['name']
-     email=request.form['email']
-     phone_number=request.form['phone']
-     password=request.form['pass']
+    if request.method=='POST':
+        name=request.form['name']
+        email=request.form['email']
+        phone_number=request.form['phone']
+        password=request.form['pass']
+        hashed_password=bcrypt.generate_password_hash(password).decode('utf-8')
+        user=check_user(email)
+        
+        if not user:
+            new_user=(name,email,phone_number,hashed_password)
+            add_users(new_user)
+            return redirect(url_for('login')) #passing name of the function
+        else:
+            print('already registered')
+    return render_template('register.html')
 
-     hashed_password=bcrypt.check_password_hash(password).decode('utf-8')
-     user=check_user(email)
-     if user ==None:
-         new_user=(name,email,phone_number,hashed_password)
-         add_users(new_user)
-         return redirect(url_for('login')) #passing name of the function
-     else:
-         pass
-
-     return render_template('Register.html')
-
-
-@app.route('/login')
+@app.route('/login',methods=['GET','POST'])
 def login():
-    return render_template('login.html')
+    if request.method=='POST':
+        email=request.form['email']
+        password=request.form['pass']
 
+        user=check_user(email)
+        if not user:
+            return redirect(url_for('register'))
+        else:
+            if bcrypt.check_password_hash(password,):
+
+
+
+
+
+
+    return render_template('login.html')
 
 
 #running an application one has to tell FLASK 
 app.run(debug=True)
+
