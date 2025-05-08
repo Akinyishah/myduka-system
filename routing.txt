@@ -265,6 +265,6 @@ must have a secret key.
                          -used to rem information based on what i am doing or checking.rem who was logged in
                          -having a preferences
 
-SESSIONS: way of storing user data in between requests 
+SESSIONS: way of storing user data in between requests USING COKKIES
     -keeping a user logged in 
     -page protection,storing user preferences                          

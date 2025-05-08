@@ -2,41 +2,32 @@
 {% block title %} login {% endblock %}
 
 {% block content %}
-<div class="container">
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    <ul class=flashes>
-        {% for category, message in messages %}
-        <li class=" flash-message {{ category }}">
-            [{{ category }}] {{ message }}
-        </li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
-</div>
 <form action="/login" method="post">
     <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label fw-bold">Email_address</label>
-        <input type="email" class="form-control border-box w-50" name="email" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <input type="email" class="form-control border-box w-50" name="email" id="exampleInputEmail1"
+            aria-describedby="emailHelp">
     </div>
     <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label fw-bold">Password</label>
         <input type="password" class="form-control border-box w-50" name="pass" id="exampleInputPassword1">
+
     </div>
     <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
-      </label>
-      <div>
-        <button type="submit" class="btn btn-primary border-box w-50 mt-4">login</button>
-      </div>
-    
-    <div class="container d-block mt-4" style="background-color:#f1f1f1">
-        <button type="button" class="cancelbtn">Cancel</button>
+        <input type="checkbox" class="form-check-input" name="remember"> Remember me
+    </label> <br> <br>
+    <div>
+        <button type="submit" class="btn btn-primary border-box w-50">login</button>
+    </div>
+
+    <div class="container d-block mt-4">
+        <button type="button" class="cancelbtn border-box w-50 ">Cancel</button>
+    </div>
+    <div class="mt-4">
         <span class="psw">Forgot <a href="#">password?</a></span>
     </div>
+
 </form>
-</div>
 
 
 

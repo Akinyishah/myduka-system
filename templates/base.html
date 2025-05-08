@@ -11,21 +11,40 @@
 </head>
 
 <body>
-    <div class="container">
-        <nav class="navbar bg-info">
+    <div class="container-fluid">
+        <nav class="navbar bg-info sticky-top">
             <div class="container-fluid">
-                <a class="nav-link active" aria-current="page" href="/">Home</a>
-                <a class="nav-link" href="/products">Products</a>
-                <a class="nav-link" href="/sales">Sales</a>
-                <a class="nav-link" href="/Dashboard">Dashboard</a>
-                <a class="nav-link" href="/Register">Register</a>
-                <a class="nav-link" href="/login">login</a>
+                <a class="navbar-brand fw-bold" href="#">
+                    <img src="{{ url_for('static', filename='sande diary farm.jpg') }}" alt="Logo" width="30"
+                        height="24" class="d-inline-block align-text-top">
+                    MY DUKA
+                </a>
+                <a class="nav-link active fw-bold" aria-current="page" href="/">Home</a>
+                <a class="nav-link fw-bold" href="/products">Products</a>
+                <a class="nav-link fw-bold" href="/sales">Sales</a>
+                <a class="nav-link fw-bold" href="/Dashboard">Dashboard</a>
+                <a class="nav-link fw-bold" href="/Register">Register</a>
+                <a class="nav-link fw-bold" href="/login">login</a>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </div>
         </nav>
+        <div class="container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <ul class=flashes>
+                {% for category, message in messages %}
+                <div class="alert alert-{{category}} alert-dismissable fade show" role="alert">
+                    {{message}}
+                    <button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+        </div>
         <div>
             {% block content %}
             // pass whatever is unique to the pages
@@ -34,10 +53,9 @@
 
 
 
-
             {% endblock %}
         </div>
-    
+
     </div>
 
 
@@ -74,6 +92,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
+ 
 </body>
 
 </html>

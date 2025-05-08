@@ -118,7 +118,7 @@ def login():
 
         user=check_user(email)
         if not user:
-            flash("User not found,please register","error") #use of flash message if user is not found
+            flash("User not found,Please Register","info") #use of flash message if user is not found
             return redirect(url_for('register'))
         else:
             if bcrypt.check_password_hash(user[-1],password):
@@ -126,7 +126,7 @@ def login():
                 session['email']=email                                  #storing data sessions in cookies
                 return redirect(url_for('Dashboard'))
             else:
-                flash("incorrect password","error")
+                flash("incorrect password","danger")
     return render_template('login.html')
 
 
