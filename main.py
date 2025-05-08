@@ -1,12 +1,14 @@
 #this is where the APPLICATION IS app=Flask(__name__) MUST BE THERE 
 #Import flask to use it.
 
-from flask import Flask, render_template,request,redirect,url_for
+from flask import Flask, render_template,request,redirect,url_for,flash,session
 from database import fetch_products,fetch_sales,insert_products_method_2,insert_sales_method_2,profit_per_product,sales_per_product,sales_per_day,profit_per_day,check_user,add_users
 from flask_bcrypt import Bcrypt
+from functools import wraps
 
 #instantiate your application:-initializion of flask.
 app=Flask(__name__)
+app.secret_key="asjk@!ky3456!" # must be there in order for flash messages to work and it should be below flask where it is now
 
 
 #initializion of bcrypt.
@@ -23,7 +25,18 @@ def home():               #func 2
     num=[1,2,3,4,5]   
     return render_template("index.html",data=user,num=num)#declaring variable for variable e.g data=name
 
+
+def login_required(f):                                  #defines a decorator function
+    @wraps(f)                                           # takes function as a decorator ensure the above is decorator function
+    def protected(*args,**kwargs):                      #checks whether a session exists or not 
+        if 'email' not in session:
+            return redirect(url_for('login'))
+        return f(*args,**kwargs)                         #call funsction so that it can return to the required page 
+    return protected                                      # this function can only come after home because it cant come below the pages you wana protect.
+
+
 @app.route('/products')
+@login_required
 def products():
     fruits=["apple","oranges","tangerines","cauliflower","grapes"]
     products=fetch_products()                                            # calling the function so that it can store the function from the database.
@@ -40,6 +53,7 @@ def add_products():
     return redirect(url_for('products'))
 
 @app.route('/sales')
+@login_required
 def sales():
   sales=fetch_sales()
   products=fetch_products()
@@ -56,6 +70,7 @@ def make_sale():
  
 
 @app.route('/Dashboard')
+@login_required
 def Dashboard():
     profit_product=profit_per_product()
     sale_product=sales_per_product()
@@ -103,12 +118,15 @@ def login():
 
         user=check_user(email)
         if not user:
+            flash("User not found,please register","error") #use of flash message if user is not found
             return redirect(url_for('register'))
         else:
             if bcrypt.check_password_hash(user[-1],password):
+                flash("logged in","success")
+                session['email']=email                                  #storing data sessions in cookies
                 return redirect(url_for('Dashboard'))
             else:
-                print("incorrect password")
+                flash("incorrect password","error")
     return render_template('login.html')
 
 

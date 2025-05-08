@@ -251,3 +251,20 @@ REGISTER ROUTE on main.py
 WHEN A USER IS POSTED 
 getting user infor from a form after posting to FLASK attempting a log in Flask will extract data using request object
 If user Exists will check their password stored verses password being inputted if they match redirect user to dashboard
+
+FLASHING-one time notifications to the  user based on user action,
+        -success
+        -error / danger 
+        -infor
+        -warning
+Must IMPORT  flash from flask then replace any print statement with FLASH 
+-Implement Flashing in the HTML pages you want it viewed. 
+must have a secret key.
+-what we have with the flask imeplementation info needs to be stored somewhere,store infor in the browser.
+-STORAGE SYSTEM called cookies- small piece of data stored in the browser by a server.
+                         -used to rem information based on what i am doing or checking.rem who was logged in
+                         -having a preferences
+
+SESSIONS: way of storing user data in between requests 
+    -keeping a user logged in 
+    -page protection,storing user preferences                          
