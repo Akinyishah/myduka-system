@@ -118,7 +118,7 @@ def login():
 
         user=check_user(email)
         if not user:
-            flash("User not found,Please Register","info") #use of flash message if user is not found
+            flash("User not found,Please Register","danger") #use of flash message if user is not found MESSAGE CATEGORY
             return redirect(url_for('register'))
         else:
             if bcrypt.check_password_hash(user[-1],password):
