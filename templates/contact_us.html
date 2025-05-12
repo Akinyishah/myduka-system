@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %} Contact Us {% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="d-flex justify-content-center align-items-center min-vh-100">
+    <img src="{{ url_for('static', filename='Tshirt mockup.png') }}" class="img-fluid w-50 text-center" alt="">
+  </div>
+  <div
+    class="card-img-overlay card-img-overlay d-flex flex-column justify-content-center text-center text-decoration:overline"
+    style="background-color: rgba(0, 0, 0, 0.5)">
+    <h2 class="card-title text-primary mb-4">Need Help, we are here for you</h2>
+    <p class="mb-4 fw-bold text-white">we pride ourselves in our clarity and availability to further assist. <br> Feel
+      free to reach out to us with any <br>
+      questions you might have. <br>We’re available on the social channels listed below, <br> bras well as through our
+      email and
+      phone number. While you’re here, <br>why not talk to us through the form below?</p>
+  </div>
+
+</div>
+
+
+<div class="container mt-5 d-flex justify-content-center;">
+  <div class=""><a href="https://x.com/sharlynemrc7" target="_blank"><i class="fa-solid fa-phone fa-lg"
+        style="color: #63E6BE;"></i>
+      <p>Call Us</p>
+      <p>0728174205</p>
+  </div>
+  <div>
+    <a href="https://www.instagram.com/sharlynemercy/?next=%2F" target="_blank"><i class="fa-brands fa-instagram fa-lg"
+        style="color: #34d54f;"></i></a>
+    <p>Whatsapp Us</p>
+    <p>0728174205</p>
+  </div>
+  <div>
+    <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank"><i class="fa-solid fa-envelope"
+        style="color: #43b9d0;"></i></a>
+    <p>Email Us</p>
+    <p>sande989@gmail.com</p>
+  </div>
+  <div>
+    <a href="https://www.linkedin.com/in/shalyne-akinyi-3aa93b70/" target="_blank"><i
+        class="fa-brands fa-linkedin fa-lg" style="color: #74C0FC;"></i></a>
+    <p>SMS Us</p>
+    <p>0728174205</p>
+  </div>
+</div>
+
+<form action="">
+  <div class="row g-3 mt-4">
+    <div class="col">
+      <input type="text" class="form-control border border-primary  w-50" placeholder="First name"
+        aria-label="First name">
+    </div>
+    <div class="col">
+      <input type="text w-50" class="form-control border border-primary w-50" placeholder="Last name"
+        aria-label="Last name">
+    </div>
+  </div>
+  <div class="row g-3 mt-4">
+    <div class="col">
+      <input type="text" class="form-control border border-primary w-50" placeholder="Email Adress"
+        aria-label="First name">
+    </div>
+    <div class="col">
+      <input type="text" class="form-control border border-primary w-50 " placeholder="Phone Number"
+        aria-label="Last name">
+    </div>
+  </div>
+  <div class="mt-4">
+    <div class="col mb-3" style="width: 100%; min-height: 150px;">
+      <input type="textarea" class="form-control border border-primary" placeholder="Comments" aria-label="comments">
+    </div>
+  </div>
+  <div class="text-center">
+    <button type="submit" class="rounded-pill text-bg-primary w-80 ">Submit Now</button>
+  </div>
+</form>
+
+
+{% endblock %}
+
+</body>
+
+</html>
