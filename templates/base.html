@@ -23,12 +23,18 @@
                     MY DUKA
                 </a>
                 <a class="nav-link active fw-bold" aria-current="page" href="/">Home</a>
+                {% if session.email %}
                 <a class="nav-link fw-bold" href="/products">Products</a>
                 <a class="nav-link fw-bold" href="/sales">Sales</a>
+                 <a class="nav-link fw-bold" href="/stock">Stock</a>
                 <a class="nav-link fw-bold" href="/Dashboard">Dashboard</a>
+                 <a class="nav-link fw-bold" href="/Logout">Logout</a>
+                 {% else %}
                 <a class="nav-link fw-bold" href="/Register">Register</a>
                 <a class="nav-link fw-bold" href="/login">login</a>
                 <a class="nav-link fw-bold" href="/Contact Us">Contact Us</a>
+                {% endif %}
+
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>

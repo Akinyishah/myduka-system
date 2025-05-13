@@ -2,7 +2,7 @@
 #Import flask to use it.
 
 from flask import Flask, render_template,request,redirect,url_for,flash,session
-from database import fetch_products,fetch_sales,insert_products_method_2,insert_sales_method_2,profit_per_product,sales_per_product,sales_per_day,profit_per_day,check_user,add_users
+from database import fetch_products,fetch_sales,insert_products_method_2,insert_sales_method_2,profit_per_product,sales_per_product,sales_per_day,profit_per_day,check_user,add_users,add_stock_method_2,fetch_stock
 from flask_bcrypt import Bcrypt
 from functools import wraps
 
@@ -25,8 +25,8 @@ def home():               #func 2
     num=[1,2,3,4,5]   
     return render_template("index.html",data=user,num=num)#declaring variable for variable e.g data=name
 
-
-def login_required(f):                                  #defines a decorator function
+#defines a decorator function which protects the pages so that just not anyone can log in
+def login_required(f):                               
     @wraps(f)                                           # takes function as a decorator ensure the above is decorator function
     def protected(*args,**kwargs):                      #checks whether a session exists or not 
         if 'email' not in session:
@@ -47,8 +47,7 @@ def add_products():
     product_name=request.form["p-name"]
     buying_price=request.form["b-price"]
     selling_price=request.form["s-price"]
-    stock_quantity=request.form["stock"]
-    new_product=(product_name, buying_price,selling_price, stock_quantity)
+    new_product=(product_name, buying_price,selling_price,)
     insert_products_method_2(new_product)
     return redirect(url_for('products'))
 
@@ -59,7 +58,24 @@ def sales():
   products=fetch_products()
   return render_template("sales.html",sales=sales,products=products)                    #products=products-declare a nother variable to hold the 1st variable
 
+@app.route('/stock')
+def stock():
+    #GET STOCKS using products 
+    products=fetch_products()
+    stock=fetch_stock()
+    return render_template('stock.html',products=products)
 
+@app.route('/add_stock',methods=['GET','POST'])
+def add_stock():
+    if request.method=='POST':
+        pid=request.form['pid']
+        quantity=request.form['quantity']
+        new_stock=(pid,quantity)
+        add_stock(new_stock)
+        flash('stock added','success')
+        return redirect(url_for('stock'))
+   
+   
 @app.route('/make_sale',methods=['POST'])
 def make_sale():
     product_id=request.form['pid']
@@ -132,6 +148,14 @@ def login():
 @app.route('/Contact Us')
 def contact_Us():
     return render_template('contact_us.html')
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    session.pop('email',None)
+    flash('You have logged out','info')
+    return redirect(url_for('login'))
 
 
 

@@ -268,3 +268,10 @@ must have a secret key.
 SESSIONS: way of storing user data in between requests USING COKKIES
     -keeping a user logged in 
     -page protection,storing user preferences                          
+
+
+Gotten rid of stock quantity in products,
+we have a stock table
+stock going to keep track of quantity of products we have 
+    - have '/ stock'
+        get stock and get products

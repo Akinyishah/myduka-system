@@ -68,7 +68,7 @@ def insert_sales():
 #INSERT PRODUCTS -METHOD 1 TAKES VALUES AS PARAMETERS AND USES placeholders which acts as temporary value;
 #NUMBER OF PLACEHOLDERS HAVE TO MATCH NUMBER OF COLUMNS
 def insert_products(values):
-  insert_products="insert into products(name,buying_price,selling_price,stock_quantity)values(%s,%s,%s,%s)"
+  insert_products="insert into products(name,buying_price,selling_price,)values(%s,%s,%s,)"
   cur.execute(insert_products,values)
   conn.commit()
 
@@ -84,7 +84,7 @@ product_values2=('blenders',9600,11150,30)
   #INSTEAD WE USE PLACEHOLDERS WITH{VALUES} PARAMETER IN A FOMARTED STRING 
 
 def insert_products_method_2(values):
-  insert = f"insert into products(name,buying_price,selling_price,stock_quantity)values{values}"
+  insert = f"insert into products(name,buying_price,selling_price,)values{values}"
   cur.execute(insert)
   conn.commit()
 
@@ -116,7 +116,7 @@ def insert_sales_method_2(values):
 
 #INSERT PRODUCTS METHOD 2
 def insert_products_method_2(values):
-  insert = f"insert into products(name,buying_price,selling_price,stock_quantity)values{values}"
+  insert = f"insert into products(name,buying_price,selling_price)values{values}"
   cur.execute(insert)
   conn.commit()
 #product1=("laptop",24500,32600,70) #should be outside the def function.After conn.commit remove indentation
@@ -169,17 +169,27 @@ def profit_per_day():
 
 def check_user(email):
    query="select * from users WHERE email =%s"
-   cur.execute(query,(email,) ) #the comma is after email so as it can be regognized as tuple
+   cur.execute(query,(email,)) #the comma is after email so as it can be recognized as tuple
    user=cur.fetchone()
    return user
 
 
 def add_users (user_details):
-   query="insert into users(name,email,phone_number,password)values(%s,%s,%s,%s)"
+   query="insert into users(full_name,email,phone_number,password)values(%s,%s,%s,%s)"
    cur.execute(query,user_details)
    conn.commit()
 
 
+def fetch_stock():
+ cur.execute('select * from stock;')
+ stock=cur.fetchall()
+ return stock
+
+
+def add_stock_method_2(values):
+  insert ="insert into stock(pid,stock_quantity,created_at)values(%s,%s,'now()')"
+  cur.execute(insert,values)
+  conn.commit()
 
    
 
