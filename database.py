@@ -8,7 +8,7 @@ conn=psycopg2.connect(user='postgres',
                       port='5432',
                       database='myduka' 
                       )
-#executes DB operations
+
 #THis is a global variable 
 cur = conn.cursor()                      
 time=datetime.now() # creating time as at now 
@@ -18,14 +18,14 @@ time=datetime.now() # creating time as at now
 #for sale in sales: #for loop if you want your data to look presentable and readable.
 
 def fetch_products():
-  cur.execute('select * from products;')
-  products=cur.fetchall()
-  return products
+    cur.execute('select * from products;')
+    products=cur.fetchall()
+    return products
 
 def fetch_sales():
- cur.execute('select * from sales;')
- sales=cur.fetchall()
- return sales
+  cur.execute('select * from sales;')
+  sales=cur.fetchall()
+  return sales
 
 def fetch_users():
    cur.execute('select * from users;')
@@ -43,9 +43,9 @@ def fetch_users():
 # Hint: let your functions take parameters(table,data)-USE A FORMATTED STRING cause its a variable uses F string 
 
 def fetch_data(table):
-  cur.execute(f"select * from {table} ;")
-  data=cur.fetchall()
-  return data
+    cur.execute(f"select * from {table} ;")
+    data=cur.fetchall()
+    return data
 
 products=fetch_data('products')
 sales=fetch_data('sales')
@@ -54,6 +54,8 @@ users=fetch_data('users')
 # print("sales from fetch data func:\n", sales)
 # print("users from fetch data func:\n", users)
 
+
+
 # INSERTING PRODUCTS 
 def insert_products():
      cur.execute("insert into products(name,buying_price,selling_price,stock_quantity)values('Apple cider Vinegar',1210.50,1579.00,80)")
@@ -61,16 +63,16 @@ def insert_products():
      return "product inserted"
 
 def insert_sales():
-     cur.execute(f"insert into sales(pid,quantity,created_at)values(1,110,'{time}')")# when passing variable as a string use formated string f''
+     cur.execute(f"insert into sales(pid,quantity,created_at)values(1,110,'{time}')")
      conn.commit
      return "sales made"
 
 #INSERT PRODUCTS -METHOD 1 TAKES VALUES AS PARAMETERS AND USES placeholders which acts as temporary value;
-#NUMBER OF PLACEHOLDERS HAVE TO MATCH NUMBER OF COLUMNS
+#Number of Placeholders have to Match Number of Columns
 def insert_products(values):
-  insert_products="insert into products(name,buying_price,selling_price,)values(%s,%s,%s,)"
-  cur.execute(insert_products,values)
-  conn.commit()
+    insert_products="insert into products(name,buying_price,selling_price,)values(%s,%s,%s,)"
+    cur.execute(insert_products,values)
+    conn.commit()
 
 #provide the product values that you want to add.
 product_values1=('potatoes',1000,1150,50)
@@ -80,45 +82,30 @@ product_values2=('blenders',9600,11150,30)
 # products=fetch_data('products') # CALL IT AFTER INSERT SO AS TO SEE IF ITS ADDED
 #print("fetch data after modification func.\n",products)
 
-  #INSERT PRODUCTS -METHOD 2 still TAKES VALUES AS PARAMETERS BUT DOES NOT USE PLACEHOLDERS USES A FORMATED STRING
-  #INSTEAD WE USE PLACEHOLDERS WITH{VALUES} PARAMETER IN A FOMARTED STRING 
+ #INSERT PRODUCTS -METHOD 2 still TAKES VALUES AS PARAMETERS BUT DOES NOT USE PLACEHOLDERS USES A FORMATED STRING
+#INSTEAD WE USE PLACEHOLDERS WITH{VALUES} PARAMETER IN A FOMARTED STRING 
 
 def insert_products_method_2(values):
-  insert = f"insert into products(name,buying_price,selling_price,)values{values}"
-  cur.execute(insert)
-  conn.commit()
+    insert = f"insert into products(name,buying_price,selling_price,)values{values}"
+    cur.execute(insert)
+    conn.commit()
 
 product1=("laptop",24500,32600,70) #should be outside the def function.After conn.commit remove indentation
 # insert_products_method_2(product1)
 # products=fetch_data('products')
 # print("fetching prods using method2:\n",products)
 
-
-#METHOD 3-INSERT DATA INTO MULTIPLE TABLES WITH VARYING NUMBER OF COLUMNS
-#INSERT UNTO <TABLE_NAME>(COLUMNS)VALUES{};
-# def insert_data(table,columns,values):
-#    cur.execute(f"insert into {table}({columns})values{values}")
-#    conn.commit()
-
-# table='products'
-# columns='name,buying_price,selling_price,stock_quantity'
-# # values=('Microwave',8999,9999,8)
-# # insert_data(table,columns,values)
-# products=fetch_data('products')
-# # print(products)
-
-
 #INSERT SALES METHOD 2
 def insert_sales_method_2(values):
-  insert ="insert into sales(pid,quantity,created_at)values(%s,%s,'now()')"
-  cur.execute(insert,values)
-  conn.commit()
+    insert ="insert into sales(pid,quantity,created_at)values(%s,%s,'now()')"
+    cur.execute(insert,values)
+    conn.commit()
 
 #INSERT PRODUCTS METHOD 2
 def insert_products_method_2(values):
-  insert = f"insert into products(name,buying_price,selling_price)values{values}"
-  cur.execute(insert)
-  conn.commit()
+    insert = f"insert into products(name,buying_price,selling_price)values{values}"
+    cur.execute(insert)
+    conn.commit()
 #product1=("laptop",24500,32600,70) #should be outside the def function.After conn.commit remove indentation
 # insert_products_method_2(product1)
 # products=fetch_data('products')
@@ -131,6 +118,7 @@ def profit_per_product():
    profit_per_product=cur.fetchall()
    return profit_per_product
 
+
 #SALES PER PRODUCT:
 def sales_per_product():
    cur.execute("""SELECT products.name,SUM(products.selling_price*sales.quantity) AS Total_Sales FROM 
@@ -138,12 +126,14 @@ def sales_per_product():
    sales_per_product=cur.fetchall()
    return sales_per_product
 
+
 #SALES PER DAY:
 def sales_per_day():
    cur.execute("""SELECT date(sales.created_at) AS date, SUM(products.selling_price*sales.quantity)AS revenue FROM 
                sales INNER JOIN products ON products.id = sales.pid GROUP BY date  ORDER BY date ASC;""")
    sales_per_day=cur.fetchall()
    return sales_per_day
+
 
 #PROFIT PER DAY:
 def profit_per_day():
@@ -153,20 +143,7 @@ def profit_per_day():
    return profit_per_day
 
 
-
-
-# #INSERT USERS USING METHOD 2
-# def insert_users_method_2(values):
-#   insert = f"insert into users(name,Email,phone_number)values{values}"
-#   cur.execute(insert)
-#   conn.commit()
-# user1=("Akello Veronica","vakello98@gmail.com","+254708794582") #should be outside the def function.After conn.commit remove indentation
-# insert_users_method_2(user1)
-# users=fetch_data('users')
-# print("fetching users using method2:\n",users)
-
 #POINT OF THIS IS TO RETURN 1 USER IF RETURNS INFOR IT MEANS USER ALREDAY EXISTS SO LOG IN
-
 def check_user(email):
    query="select * from users WHERE email =%s"
    cur.execute(query,(email,)) #the comma is after email so as it can be recognized as tuple
@@ -181,15 +158,22 @@ def add_users (user_details):
 
 
 def fetch_stock():
- cur.execute('select * from stock;')
- stock=cur.fetchall()
- return stock
+  cur.execute('select * from stock;')
+  stock=cur.fetchall()
+  return stock
 
 
-def add_stock_method_2(values):
-  insert ="insert into stock(pid,stock_quantity,created_at)values(%s,%s,'now()')"
-  cur.execute(insert,values)
-  conn.commit()
+def insert_stock(values):
+    insert ="insert into stock(pid,stock_quantity,created_at)values(%s,%s,'now()')"
+    cur.execute(insert,values)
+    conn.commit()
+
+def available_stock(pid):
+    cur.execute("select coalesce(sum(stock_quantity), 0) from stock where pid =%s", (pid,))
+    total_stock=cur.fetchone()[0]
+    cur.execute("select sum(sales.quantity) from sales where pid =%s", (pid,))
+    total_sold=cur.fetchone()[0] or 0
+    return total_stock-total_sold    
 
    
 

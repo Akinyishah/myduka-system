@@ -275,3 +275,12 @@ we have a stock table
 stock going to keep track of quantity of products we have 
     - have '/ stock'
         get stock and get products
+
+
+ -WE HAVE STOCKS TO KEEP TRACK OF PRODUCT QUANTITY(PID)
+    -before you make/post sales check that you do have enough stock
+        -if stock is insufficient you flash"insufficient" 
+        -if sufficient "make sale"     
+checking if stock is enough we have to:
+
+     select stock_quantity from stock;           

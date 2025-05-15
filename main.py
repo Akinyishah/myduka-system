@@ -1,46 +1,43 @@
-#this is where the APPLICATION IS app=Flask(__name__) MUST BE THERE 
-#Import flask to use it.
-
 from flask import Flask, render_template,request,redirect,url_for,flash,session
-from database import fetch_products,fetch_sales,insert_products_method_2,insert_sales_method_2,profit_per_product,sales_per_product,sales_per_day,profit_per_day,check_user,add_users,add_stock_method_2,fetch_stock
+from database import fetch_products,fetch_sales,insert_products_method_2,insert_sales_method_2,profit_per_product,sales_per_product,sales_per_day,profit_per_day,check_user,add_users,fetch_stock,insert_stock,available_stock
 from flask_bcrypt import Bcrypt
 from functools import wraps
 
 #instantiate your application:-initializion of flask.
 app=Flask(__name__)
-app.secret_key="asjk@!ky3456!" # must be there in order for flash messages to work and it should be below flask where it is now
 
+# must be there in order for flash messages to work and it should be below flask where it is now
+app.secret_key="asjk@!ky3456!" 
 
 #initializion of bcrypt.
 bcrypt=Bcrypt(app) #used in this application
 
-#this is a route part of a URL that determines what functions to execute.route connects functions to the URL 
-#mapping url to a function
-#Decorator-function that wraps another function to modify its behaviour
-#Functions MUST HAVE unique NAME
 
-@app.route('/')          #func 1
-def home():               #func 2  
+@app.route('/')    
+def home():            
     user={"name":"Akinyi","location":"Nairobi","area":"Luanda"}    
     num=[1,2,3,4,5]   
-    return render_template("index.html",data=user,num=num)#declaring variable for variable e.g data=name
+    return render_template("index.html",data=user,num=num)
 
 #defines a decorator function which protects the pages so that just not anyone can log in
+#checks whether a session exists or not 
+# this function can only come after home because it cant come below the pages you wana protect.
+
 def login_required(f):                               
-    @wraps(f)                                           # takes function as a decorator ensure the above is decorator function
-    def protected(*args,**kwargs):                      #checks whether a session exists or not 
+    @wraps(f)                                          
+    def protected(*args,**kwargs):                    
         if 'email' not in session:
             return redirect(url_for('login'))
-        return f(*args,**kwargs)                         #call funsction so that it can return to the required page 
-    return protected                                      # this function can only come after home because it cant come below the pages you wana protect.
+        return f(*args,**kwargs)                          
+    return protected                                      
 
 
 @app.route('/products')
 @login_required
 def products():
     fruits=["apple","oranges","tangerines","cauliflower","grapes"]
-    products=fetch_products()                                            # calling the function so that it can store the function from the database.
-    return render_template("products.html",fruits=fruits,products=products)#products=products-declare a nother variable to hold the 1st variable
+    products=fetch_products()                                           
+    return render_template("products.html",fruits=fruits,products=products)
 
 @app.route('/add_products',methods=["GET","POST"])
 def add_products():
@@ -56,14 +53,14 @@ def add_products():
 def sales():
   sales=fetch_sales()
   products=fetch_products()
-  return render_template("sales.html",sales=sales,products=products)                    #products=products-declare a nother variable to hold the 1st variable
+  return render_template("sales.html",sales=sales,products=products)
 
 @app.route('/stock')
 def stock():
     #GET STOCKS using products 
     products=fetch_products()
     stock=fetch_stock()
-    return render_template('stock.html',products=products)
+    return render_template('stock.html',products=products,stock=stock)
 
 @app.route('/add_stock',methods=['GET','POST'])
 def add_stock():
@@ -71,8 +68,8 @@ def add_stock():
         pid=request.form['pid']
         quantity=request.form['quantity']
         new_stock=(pid,quantity)
-        add_stock(new_stock)
-        flash('stock added','success')
+        insert_stock(new_stock)
+        flash('stock added successfully','success')
         return redirect(url_for('stock'))
    
    
@@ -81,7 +78,16 @@ def make_sale():
     product_id=request.form['pid']
     quantity=request.form['quantity']
     new_sale=[product_id,quantity]
+    stock_available=available_stock(product_id)
+    if stock_available is None:
+        flash("invalid product ID or no stock information","danger")
+        return redirect(url_for('sales'))
+    
+    if stock_available <float(quantity):
+        flash("insufficient stock","info")
+        return redirect(url_for('sales'))
     insert_sales_method_2(new_sale)
+    flash("sale made","success")
     return redirect(url_for('sales'))
  
 
@@ -94,6 +100,7 @@ def Dashboard():
     profit_day=profit_per_day()
 
 #LIST COMPREHENSION TO GET INDIVIDUAL DATA POINTS
+
     product_name=[i [0] for i in profit_product]
     p_product=[float(i[1])for i in profit_product]
     s_product=[float(i[1]) for i in sale_product]
