@@ -1,5 +1,5 @@
 from flask import Flask, render_template,request,redirect,url_for,flash,session
-from database import fetch_products,fetch_sales,insert_products_method_2,insert_sales_method_2,profit_per_product,sales_per_product,sales_per_day,profit_per_day,check_user,add_users,fetch_stock,insert_stock,available_stock,edit_product,product_name
+from database import fetch_products,fetch_sales,insert_products_method_2,insert_sales_method_2,profit_per_product,sales_per_product,sales_per_day,profit_per_day,check_user,add_users,fetch_stock,insert_stock,available_stock,update_prod
 from flask_bcrypt import Bcrypt
 from functools import wraps
 
@@ -48,16 +48,16 @@ def add_products():
     insert_products_method_2(new_product)
     return redirect(url_for('products'))
 
-@app.route('/update_product')
+@app.route('/update_product',methods=['GET','POST'])
 def update_product():
     if request.method=='POST':
-        name=request.form['p-name']
+        name=request.form['name']
         buying_price=request.form["buying_price"]
         selling_price=request.form["selling_price"]
         pid=request.form['pid']
         edited_product=(pid,name,buying_price,selling_price)
-        edit_product(edited_product)
-        flash("product edited successfully","info")
+        update_prod(edited_product)
+        flash("product edited successfully","success")
         return redirect(url_for('product'))
 
 @app.route('/sales')
