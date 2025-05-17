@@ -1,12 +1,12 @@
 from flask import Flask, render_template,request,redirect,url_for,flash,session
-from database import fetch_products,fetch_sales,insert_products_method_2,insert_sales_method_2,profit_per_product,sales_per_product,sales_per_day,profit_per_day,check_user,add_users,fetch_stock,insert_stock,available_stock
+from database import fetch_products,fetch_sales,insert_products_method_2,insert_sales_method_2,profit_per_product,sales_per_product,sales_per_day,profit_per_day,check_user,add_users,fetch_stock,insert_stock,available_stock,edit_product,product_name
 from flask_bcrypt import Bcrypt
 from functools import wraps
 
 #instantiate your application:-initializion of flask.
 app=Flask(__name__)
 
-# must be there in order for flash messages to work and it should be below flask where it is now
+# must be there in order for flash messages to work and it should be below flask where it is now/used in cookies
 app.secret_key="asjk@!ky3456!" 
 
 #initializion of bcrypt.
@@ -47,6 +47,18 @@ def add_products():
     new_product=(product_name, buying_price,selling_price,)
     insert_products_method_2(new_product)
     return redirect(url_for('products'))
+
+@app.route('/update_product')
+def update_product():
+    if request.method=='POST':
+        name=request.form['p-name']
+        buying_price=request.form["buying_price"]
+        selling_price=request.form["selling_price"]
+        pid=request.form['pid']
+        edited_product=(pid,name,buying_price,selling_price)
+        edit_product(edited_product)
+        flash("product edited successfully","info")
+        return redirect(url_for('product'))
 
 @app.route('/sales')
 @login_required
@@ -144,7 +156,7 @@ def login():
             flash("User not found,Please Register","danger") #use of flash message if user is not found MESSAGE CATEGORY
             return redirect(url_for('register'))
         else:
-            if bcrypt.check_password_hash(user[-1],password):
+            if bcrypt.check_password_hash(user[-1],password):#confirming password but start with hashed password then password input
                 flash("logged in","success")
                 session['email']=email                                  #storing data sessions in cookies
                 return redirect(url_for('Dashboard'))

@@ -145,7 +145,7 @@ def profit_per_day():
 
 #POINT OF THIS IS TO RETURN 1 USER IF RETURNS INFOR IT MEANS USER ALREDAY EXISTS SO LOG IN
 def check_user(email):
-   query="select * from users WHERE email =%s"
+   query="select * from users WHERE email = %s"
    cur.execute(query,(email,)) #the comma is after email so as it can be recognized as tuple
    user=cur.fetchone()
    return user
@@ -171,9 +171,20 @@ def insert_stock(values):
 def available_stock(pid):
     cur.execute("select coalesce(sum(stock_quantity), 0) from stock where pid =%s", (pid,))
     total_stock=cur.fetchone()[0]
-    cur.execute("select sum(sales.quantity) from sales where pid =%s", (pid,))
+    cur.execute("select coalesce (sum(sales.quantity),0) from sales where pid =%s", (pid,))
     total_sold=cur.fetchone()[0] or 0
     return total_stock-total_sold    
+
+
+def product_name(pid):
+    cur.execute("select name FROM products WHERE id = %s",(pid,))
+    product=cur.fetchone()[0] or "Unknown Prod"
+    return product
+
+def edit_product(values):
+    cur.execute("update products set name = %s,buying_price =%s, selling_price = %s where id = %s",values)
+    conn.commit()
+
 
    
 

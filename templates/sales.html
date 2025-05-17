@@ -46,26 +46,27 @@
     </div>
 </div>
 <div class="container mt-4">
-    <table class="table table-striped-columns table table-hover table table-bordered">
+   <table id="example" class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">Sales ID</th>
-                <th scope="col">PID</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Created at</th>
+                <th>Sale ID</th>
+                <th>PID</th>
+                <th>Quantity</th>
+                <th>Created At</th>
             </tr>
         </thead>
+        {{sales}}
         <tbody>
-            {%for sale in sales%}
+            {% for sale in sales %}
             <tr>
-                <td data-label="">{{sale[0]}}</td>
-                <td data-label="">{{sale[1]}}</td>
-                <td data-label="">{{sale[2]}}</td>
-                <td data-label="">{{sale[3]}}</td>
+                <td>{{sale[0]}}</td>
+                <td>{{sale[1]}}</td>
+                <td>{{sale[2]}}</td>
+                <td>{{sale[3]}}</td>               
             </tr>
             {% endfor %}
         </tbody>
-    </table>
+   </table>
 </div>
 {% endblock %}
 
