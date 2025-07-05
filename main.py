@@ -1,5 +1,5 @@
 from flask import Flask, render_template,request,redirect,url_for,flash,session
-from database import fetch_products,fetch_sales,insert_products_method_2,insert_sales_method_2,profit_per_product,sales_per_product,sales_per_day,profit_per_day,check_user,add_users,fetch_stock,insert_stock,available_stock
+from database import fetch_products,fetch_sales,insert_products_method_2,insert_sales_method_2,profit_per_product,sales_per_product,sales_per_day,profit_per_day,check_user,add_users,fetch_stock,insert_stock,available_stock,edit_product
 from flask_bcrypt import Bcrypt
 from functools import wraps
 
@@ -58,7 +58,7 @@ def update_product():
         edited_product=(name,buying_price,selling_price,pid)
         edit_product(edited_product)
         flash("product edited successfully","success")
-        return redirect(url_for('product'))
+        return redirect(url_for('products'))
 
 @app.route('/sales')
 @login_required
@@ -103,9 +103,9 @@ def make_sale():
     return redirect(url_for('sales'))
  
 
-@app.route('/Dashboard')
+@app.route('/dashboard')
 @login_required
-def Dashboard():
+def dashboard():
     profit_product=profit_per_product()
     sale_product=sales_per_product()
     sale_day=sales_per_day()
@@ -127,7 +127,7 @@ def Dashboard():
                            product_name=product_name,p_product=p_product,s_product=s_product,
                            date=date,s_day=s_day,p_day=p_day)
 
-@app.route('/Register',methods=['GET','POST'])
+@app.route('/register',methods=['GET','POST'])
 def register():
     if request.method=='POST':
         name=request.form['name']
@@ -159,7 +159,7 @@ def login():
             if bcrypt.check_password_hash(user[-1],password):#confirming password but start with hashed password then password input
                 flash("logged in","success")
                 session['email']=email                                  #storing data sessions in cookies
-                return redirect(url_for('Dashboard'))
+                return redirect(url_for('dashboard'))
             else:
                 flash("incorrect password","danger")
     return render_template('login.html')

@@ -181,7 +181,7 @@ def product_name(pid):
     product=cur.fetchone()[0] or "Unknown Prod"
     return product
 
-def update_prod(values):
+def edit_product(values):
     cur.execute("update products set name = %s,buying_price =%s, selling_price = %s where id = %s",values)
     conn.commit()
 

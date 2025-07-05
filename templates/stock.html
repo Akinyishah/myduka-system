@@ -45,8 +45,6 @@
         </div>
     </div>
 </div>
-               {{stock}}
-
 <div class="container mt-4">
     <table id="example" class="table table-striped">
         <thead>
@@ -58,12 +56,12 @@
             </tr>
         </thead>
         <tbody>
-            {%for sale in sales%}
+            {%for stock in stock%}
             <tr>
-                <td data-label="">{{sale[0]}}</td>
-                <td data-label="">{{sale[1]}}</td>
-                <td data-label="">{{sale[2]}}</td>
-                <td data-label="">{{sale[3]}}</td>
+                <td data-label="">{{stock[0]}}</td>
+                <td data-label="">{{stock[1]}}</td>
+                <td data-label="">{{stock[2]}}</td>
+                <td data-label="">{{stock[3]}}</td>
             </tr>
             {% endfor %}
         </tbody>
